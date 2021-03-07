@@ -31,12 +31,11 @@ public class PokemonController {
     @GetMapping("/list/{id}")
     public Pokemon listByPokemon(@PathVariable("id") int id) {
         Optional<Pokemon> pokemon = pokemonService.listId(id);
-        pokemon.ifPresent(x -> pokemon.get());
 
         if (pokemon.isPresent()) {
             return pokemon.get();
         }
 
-        throw new ModelNotFoundException("Invalid find person provided");
+        throw new ModelNotFoundException("Invalid find pokemon provided");
     }
 }

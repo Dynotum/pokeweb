@@ -8,10 +8,10 @@ public class Pokemon {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idPokemon;
-
     private String name;
 
     public Pokemon() {
+        super();
     }
 
     public Pokemon(Long idPokemon, String name) {
