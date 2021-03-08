@@ -1,29 +1,32 @@
-package com.csedano.pokeweb.model;
+package com.csedano.pokeweb.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Pokemon {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idPokemon;
+    @Column(name = "id_pokemon")
+    private Integer idPokemon;
+
     private String name;
 
     public Pokemon() {
         super();
     }
 
-    public Pokemon(Long idPokemon, String name) {
+    public Pokemon(Integer idPokemon, String name) {
         this.idPokemon = idPokemon;
         this.name = name;
     }
 
-    public Long getIdPokemon() {
+    public Integer getIdPokemon() {
         return idPokemon;
     }
 
-    public void setIdPokemon(Long idPokemon) {
+    public void setIdPokemon(Integer idPokemon) {
         this.idPokemon = idPokemon;
     }
 

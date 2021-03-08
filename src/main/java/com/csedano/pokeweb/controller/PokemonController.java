@@ -1,41 +1,44 @@
 package com.csedano.pokeweb.controller;
 
-import com.csedano.pokeweb.exception.ModelNotFoundException;
-import com.csedano.pokeweb.model.Pokemon;
+import com.csedano.pokeweb.entity.Pokemon;
 import com.csedano.pokeweb.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.Optional;
+import java.util.List;
 
 @RestController
+@RequestMapping("/pokemon")
 public class PokemonController {
 
     @Autowired
     PokemonService pokemonService;
 
     @PostMapping("/save")
-    public long save(@Validated @RequestBody Pokemon pokemon) {
-        pokemonService.save(pokemon);
-        return pokemon.getIdPokemon();
+    public ResponseEntity<Pokemon> save(@Validated @RequestBody Pokemon pokemon) {
+        return new ResponseEntity<>(pokemonService.save(pokemon), HttpStatus.CREATED);
     }
 
-
-    @GetMapping("/listAll")
-    public Collection<Pokemon> listAllPokemon() {
-        return pokemonService.list();
-    }
-
-    @GetMapping("/list/{id}")
-    public Pokemon listByPokemon(@PathVariable("id") int id) {
-        Optional<Pokemon> pokemon = pokemonService.listId(id);
-
-        if (pokemon.isPresent()) {
-            return pokemon.get();
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity delete(@PathVariable("id") int pokemonId) {
+        if (pokemonService.delete(pokemonId)) {
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
+    }
 
-        throw new ModelNotFoundException("Invalid find pokemon provided");
+    @GetMapping("/all")
+    public ResponseEntity<List<Pokemon>> listAllPokemon() {
+        return new ResponseEntity<>(pokemonService.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Pokemon> getPokemon(@PathVariable("id") int idPokemon) {
+        return pokemonService.getById(idPokemon).map(pokemon -> new ResponseEntity<>(pokemon, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }
