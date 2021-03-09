@@ -22,6 +22,11 @@ public class PokemonController {
         return new ResponseEntity<>(pokemonService.save(pokemon), HttpStatus.CREATED);
     }
 
+    @PostMapping("/saveAll")
+    public ResponseEntity<Pokemon> saveAll(@Validated @RequestBody List<Pokemon> pokemons) {
+        return new ResponseEntity<>(pokemonService.saveAll(pokemons), HttpStatus.CREATED);
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity delete(@PathVariable("id") int pokemonId) {
         if (pokemonService.delete(pokemonId)) {
@@ -37,8 +42,8 @@ public class PokemonController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Pokemon> getPokemon(@PathVariable("id") int idPokemon) {
-        return pokemonService.getById(idPokemon).map(pokemon -> new ResponseEntity<>(pokemon, HttpStatus.OK))
+    public ResponseEntity<Pokemon> getPokemon(@PathVariable("id") int id) {
+        return pokemonService.getById(id).map(pokemon -> new ResponseEntity<>(pokemon, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

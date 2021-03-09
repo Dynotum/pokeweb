@@ -18,12 +18,16 @@ public class PokemonService {
         return dao.save(pokemon);
     }
 
+    public Pokemon saveAll(List<Pokemon> pokemons) {
+        return (Pokemon) dao.saveAll(pokemons);
+    }
+
     public Pokemon update(Pokemon t) {
         return dao.save(t);
     }
 
-    public boolean delete(int idPokemon) {
-        return dao.findByIdPokemon(idPokemon).map(pokemons -> {dao.deleteById(idPokemon);
+    public boolean delete(int id) {
+        return dao.findByid(id).map(pokemons -> {dao.deleteById(id);
             return true;
         }).orElse(false);
     }
@@ -33,7 +37,7 @@ public class PokemonService {
     }
 
     public Optional<Pokemon> getById(int id) {
-        return dao.findByIdPokemon(id);
+        return dao.findByid(id);
     }
 
 }

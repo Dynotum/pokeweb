@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface IPokemonDAO extends CrudRepository<Pokemon, Integer> {
 
 //    @Query(value = "select * from pokemon where id_pokemon = ?", nativeQuery = true)
-    Optional<Pokemon> findByIdPokemon(int idPokemon);
+    Optional<Pokemon> findByid(int id);
 
 
 }
