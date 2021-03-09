@@ -17,7 +17,7 @@ import java.util.List;
 
 @SpringBootApplication
 public class PokewebApplication {
-    private final int KANTO_REGION = 5;
+    private final int KANTO_REGION = 151;
 
     private static final Logger log = LoggerFactory.getLogger(PokewebApplication.class);
 
@@ -37,13 +37,14 @@ public class PokewebApplication {
     public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
         return args -> {
             log.info("==== RESTful API Response using Spring RESTTemplate START =======");
-            List<Pokemon> pokemons = new ArrayList<>();
+//            List<Pokemon> pokemons = new ArrayList<>();
             for (int i = 1; i <= KANTO_REGION; i++) {
-                pokemons.add(restTemplate.getForObject("https://pokeapi.co/api/v2/pokemon/" + i, Pokemon.class));
-                log.info("Pokemon added: " + pokemons.get(i - 1).toString());
+                pokemonService.save(restTemplate.getForObject("https://pokeapi.co/api/v2/pokemon/" + i, Pokemon.class));
+//                pokemons.add(restTemplate.getForObject("https://pokeapi.co/api/v2/pokemon/" + i, Pokemon.class));
+                log.info("Pokemon added: " + pokemonService.getById(i));
             }
             log.info("==== RESTful API Response using Spring RESTTemplate END =======");
-            pokemonService.saveAll(pokemons);
+//            pokemonService.saveAll(pokemons);
         };
     }
 

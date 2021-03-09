@@ -23,7 +23,7 @@ public class PokemonController {
     }
 
     @PostMapping("/saveAll")
-    public ResponseEntity<Pokemon> saveAll(@Validated @RequestBody List<Pokemon> pokemons) {
+    public ResponseEntity<List<Pokemon>> saveAll(@Validated @RequestBody List<Pokemon> pokemons) {
         return new ResponseEntity<>(pokemonService.saveAll(pokemons), HttpStatus.CREATED);
     }
 

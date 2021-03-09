@@ -18,8 +18,8 @@ public class PokemonService {
         return dao.save(pokemon);
     }
 
-    public Pokemon saveAll(List<Pokemon> pokemons) {
-        return (Pokemon) dao.saveAll(pokemons);
+    public List<Pokemon> saveAll(List<Pokemon> pokemons) {
+        return (List<Pokemon>) dao.saveAll(pokemons);
     }
 
     public Pokemon update(Pokemon t) {
