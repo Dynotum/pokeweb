@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 //@RequestMapping("/pokemon")
-@Controller
+@RestController
 public class PokemonController {
 
 //    @Autowired
@@ -49,11 +49,10 @@ public class PokemonController {
 //                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 //    }
 
-    @GetMapping("/hello")
-    public String sayHello(
-            @RequestParam(defaultValue = "World", required = false) String name, Model model) {
-        model.addAttribute("user", name);
-        return "hello";
+    //
+    @GetMapping("/rest")
+    public Pokemon greet(@RequestParam(required = false, defaultValue = "chikorita") String name,
+                         @RequestParam(required = false, defaultValue = "153") int id) {
+        return new Pokemon(id, name);
     }
-
 }

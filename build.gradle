@@ -19,6 +19,7 @@ dependencies {
 //	runtimeOnly 'com.h2database:h2'
 
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.4.3'
+    implementation 'junit:junit:4.12'
     runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
