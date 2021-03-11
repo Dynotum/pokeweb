@@ -52,7 +52,7 @@ public class PokemonController {
     //
     @GetMapping("/rest")
     public Pokemon greet(@RequestParam(required = false, defaultValue = "chikorita") String name,
-                         @RequestParam(required = false, defaultValue = "153") int id) {
+                         @RequestParam(required = false, defaultValue = "152") int id) {
         return new Pokemon(id, name);
     }
 }
