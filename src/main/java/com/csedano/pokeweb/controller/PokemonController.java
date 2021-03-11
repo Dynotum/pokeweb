@@ -5,45 +5,55 @@ import com.csedano.pokeweb.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/pokemon")
+//@RequestMapping("/pokemon")
+@Controller
 public class PokemonController {
 
-    @Autowired
-    PokemonService pokemonService;
+//    @Autowired
+//    PokemonService pokemonService;
+//
+//    @PostMapping("/save")
+//    public ResponseEntity<Pokemon> save(@Validated @RequestBody Pokemon pokemon) {
+//        return new ResponseEntity<>(pokemonService.save(pokemon), HttpStatus.CREATED);
+//    }
+//
+//    @PostMapping("/saveAll")
+//    public ResponseEntity<List<Pokemon>> saveAll(@Validated @RequestBody List<Pokemon> pokemons) {
+//        return new ResponseEntity<>(pokemonService.saveAll(pokemons), HttpStatus.CREATED);
+//    }
+//
+//    @DeleteMapping("/delete/{id}")
+//    public ResponseEntity delete(@PathVariable("id") int pokemonId) {
+//        if (pokemonService.delete(pokemonId)) {
+//            return new ResponseEntity(HttpStatus.OK);
+//        } else {
+//            return new ResponseEntity(HttpStatus.NOT_FOUND);
+//        }
+//    }
+//
+//    @GetMapping("/all")
+//    public ResponseEntity<List<Pokemon>> listAllPokemon() {
+//        return new ResponseEntity<>(pokemonService.getAll(), HttpStatus.OK);
+//    }
+//
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Pokemon> getPokemon(@PathVariable("id") int id) {
+//        return pokemonService.getById(id).map(pokemon -> new ResponseEntity<>(pokemon, HttpStatus.OK))
+//                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//    }
 
-    @PostMapping("/save")
-    public ResponseEntity<Pokemon> save(@Validated @RequestBody Pokemon pokemon) {
-        return new ResponseEntity<>(pokemonService.save(pokemon), HttpStatus.CREATED);
+    @GetMapping("/hello")
+    public String sayHello(
+            @RequestParam(defaultValue = "World", required = false) String name, Model model) {
+        model.addAttribute("user", name);
+        return "hello";
     }
 
-    @PostMapping("/saveAll")
-    public ResponseEntity<List<Pokemon>> saveAll(@Validated @RequestBody List<Pokemon> pokemons) {
-        return new ResponseEntity<>(pokemonService.saveAll(pokemons), HttpStatus.CREATED);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity delete(@PathVariable("id") int pokemonId) {
-        if (pokemonService.delete(pokemonId)) {
-            return new ResponseEntity(HttpStatus.OK);
-        } else {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @GetMapping("/all")
-    public ResponseEntity<List<Pokemon>> listAllPokemon() {
-        return new ResponseEntity<>(pokemonService.getAll(), HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Pokemon> getPokemon(@PathVariable("id") int id) {
-        return pokemonService.getById(id).map(pokemon -> new ResponseEntity<>(pokemon, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
 }
