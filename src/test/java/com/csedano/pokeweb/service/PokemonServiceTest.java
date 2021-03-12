@@ -21,12 +21,12 @@ class PokemonServiceTest {
     PokemonService pokemonService;
 
     @Test
-    public void getPoke() {
-        Optional<Pokemon> optionPokemon = pokemonService.getById(1);
-
+    public void getPokemonById() {
+        final Optional<Pokemon> optionPokemon = pokemonService.getById(1);
         final Pokemon pokemon;
         if (optionPokemon.isPresent()) {
             pokemon = optionPokemon.get();
+            logger.info(pokemon.toString());
             assertEquals(pokemon.getId(), 1);
             assertEquals(pokemon.getName(), "bulbasaur");
         }
