@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(HelloController.class)
 public class HelloControllerIntegrationTest {
-    @Autowired
+/*    @Autowired
     private MockMvc mockMvc;
 
     @Test
@@ -32,7 +32,7 @@ public class HelloControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("hello"))
                 .andExpect(model().attribute("user", is("Dyno")));
-    }
+    }*/
 
 }
 

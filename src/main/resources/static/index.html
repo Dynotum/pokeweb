@@ -5,9 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/algo" method="get">
+<form action="/model?id=${id}" method="get">
     <b>Pokemon ID: </b>
-    <input type="text" name="algo"/>
+<!--    <a href="model?id=${id}">Get User</a>-->
+    <label>
+        <input type="text" value="2" name="id"/>
+    </label>
     <input type="submit" value="Click"/>
 </form>
 </body>

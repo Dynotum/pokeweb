@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HelloController {
 
-    @GetMapping("/algo")
-    public String sayHello(
-            @RequestParam(defaultValue = "World", required = false) String algo, Model model) {
-        model.addAttribute("algo", algo);
-        return "hello";
-    }
+//    @GetMapping("/algo")
+//    public String sayHello(
+//            @RequestParam(defaultValue = "World", required = false) String algo, Model model) {
+//        model.addAttribute("algo", algo);
+//        return "hello";
+//    }
 }

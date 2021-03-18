@@ -20,7 +20,7 @@ public class PokewebApplication {
     @Autowired
     PokemonService pokemonService;
 
-    private final int KANTO_REGION = 10;
+    private final int KANTO_REGION = 3;
 
     private static final Logger log = LoggerFactory.getLogger(PokewebApplication.class);
 

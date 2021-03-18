@@ -3,9 +3,12 @@ package com.csedano.pokeweb.controller;
 import com.csedano.pokeweb.entity.Pokemon;
 import com.csedano.pokeweb.service.PokemonService;
 import org.dom4j.rule.Mode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +16,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 //@RequestMapping("/pokemon")
-@RestController
 
+@Controller
 public class PokemonController {
     @Autowired
     PokemonService pokemonService;
+    Logger logger = LoggerFactory.getLogger(PokemonController.class);
 
     @PostMapping("/save")
     public ResponseEntity<Pokemon> save(@Validated @RequestBody Pokemon pokemon) {
@@ -49,6 +53,14 @@ public class PokemonController {
         model.addAttribute("id", id);
         return pokemonService.getById(id).map(pokemon -> new ResponseEntity<>(pokemon, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/model")
+    public String getPokemonById(@RequestParam int id, Model model) {
+        model.addAttribute("pokemon", pokemonService.getById(id).get().getName());
+        logger.info("id = " + id);
+//        return pokemonService.getById(id).get().getName();
+        return "hello";
     }
 
 /*    @GetMapping("/algo")
